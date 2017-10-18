@@ -63,13 +63,29 @@ public class AuthorDao implements IAuthorDao {
         return authorsAdded;
     }
 
-    public final int updateAuthor(List<Object> colValue, Object pkValue) throws SQLException, ClassNotFoundException {
+   public final int updateAuthorById(List<String> colNames, List<Object> colValues, 
+            int pkValue) throws ClassNotFoundException, SQLException {
+        
+        //validate here:
+        if (colNames == null) {
+            throw new IllegalArgumentException("You must provide valid column names to be updated.");
+        }
+        if (colValues == null) {
+            throw new IllegalArgumentException("You must provide appropriate values for each colum to be updated.");
+        }
+        if (pkValue <= 0 || pkValue > Integer.MAX_VALUE)
+            throw new IllegalArgumentException("You must provide a valid Author Id to update any records.");
+        
+        //logic
+        String tableName = "author";
+        String pkColName = "author_id";
+        
         db.openConnection(driverClass, url, userName, password);
-        int recsUpdated = db.updateRecord(AUTHOR_TBL, Arrays.asList(AUTHOR_NAME, DATE_ADDED), colValue, AUTHOR_PK, pkValue);
+        int recsUpdated = db.updateRecordById(tableName, colNames, colValues, pkColName, pkValue);
         db.closeConnection();
+        
         return recsUpdated;
-    }
-
+   }
     @Override
     public final List<Author> getListOfAuthors() throws SQLException, ClassNotFoundException {
 
@@ -95,13 +111,7 @@ public class AuthorDao implements IAuthorDao {
             Object objRecAdded = rec.get("date_added");
             Date recAdded = objRecAdded == null ? null : (Date) objRecAdded;
             author.setDateAdded(recAdded);
-//            author.setAuthorId(
-//                    Integer.parseInt(
-//                            rec.get("authorId")
-//                                    .toString()));
 
-//            author.setAuthorName(rec.get("author_name").toString());
-//            author.setDateAdded((Date)rec.get("date_added"));
             list.add(author);
         }
         db.closeConnection();
@@ -157,7 +167,7 @@ public class AuthorDao implements IAuthorDao {
                 new MySqlDataAccess()
         );
 
-        int recsDeleted = dao.removeAuthorById(20);
+    //    int recsDeleted = dao.removeAuthorById(20);
 
         List<Author> list = dao.getListOfAuthors();
 
@@ -166,6 +176,11 @@ public class AuthorDao implements IAuthorDao {
                     + a.getAuthorName() + ", " + a.getDateAdded() + "\n");
         }
 
+    }
+
+    @Override
+    public int updateAuthor(List<Object> colValue, Object pkValue) throws SQLException, ClassNotFoundException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

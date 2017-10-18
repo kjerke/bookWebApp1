@@ -17,8 +17,7 @@ import java.util.List;
  */
 public class AuthorService {
         private IAuthorDao authorDao;
-        private final String AUTHOR_TBL = "author";
-        private final String AUTHOR_PK = "author_id";
+        
     
     public AuthorService(IAuthorDao authorDao) {
         setAuthorDao(authorDao);
@@ -63,8 +62,7 @@ public class AuthorService {
         
         AuthorService authorService = 
                 new AuthorService(dao);
-        
-        int recsDeleted = authorService.removeAuthorById("1");
+       
         
         List<Author> list = authorService.getAuthorList();
         

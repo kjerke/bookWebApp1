@@ -165,6 +165,11 @@ public class MySqlDataAccess implements DataAccess {
 //        db.closeConnection();
         
     }
+
+    @Override
+    public int updateRecordById(String tableName, List<String> colNames, List<Object> colValues, String pkColName, Object pkValue) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
 

@@ -40,6 +40,10 @@ public interface DataAccess {
   public abstract void openConnection(String driverClass, 
             String url, String userName, String password) 
             throws ClassNotFoundException, SQLException;
+  
+  public abstract int updateRecordById(String tableName, List<String> colNames,
+            List<Object> colValues, String pkColName, Object pkValue)
+            throws SQLException;
 
 
     
