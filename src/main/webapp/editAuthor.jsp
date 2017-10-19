@@ -40,9 +40,7 @@
                     </form>
 
 
-                    <form name="home" method="POST" action="authorController?action=list" > 
-                        <input class="btn btn-primary btn-lg active"   type="submit" value="Back to Authors List" />
-                    </form>
+                   
                     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
                     <script
                         src="https://code.jquery.com/jquery-3.2.1.min.js"

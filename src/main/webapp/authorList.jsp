@@ -22,12 +22,12 @@
     <body>
         <div class="container">
             <div class="row">
-                <div class="col-sm-8 col-sm-offset-2">
+                <div class="col-sm-10 col-sm-offset-1">
                     
                     <h1>Author List</h1>       
-
+<input type="button" class="btn active" value="Add" onclick="location.href = 'authorController?action=add'">
                     <div class="table-responsive">
-                        <table class="table-striped table-hover" style="width:100%;">
+                        <table class="table" style="width:100%;">
                         
                   
                             <c:forEach var="a" items="${authorList}">
@@ -36,7 +36,7 @@
                                     <td><fmt:formatDate pattern = "yyyy-MM-dd" value = "${a.dateAdded}" /></td>
                                     <td><input type="button" class="btn btn-info text-center " value="Edit" 
                                                onclick="location.href = 'authorController?action=edit&id=${a.authorId}'"</td>
-                                    <td><input type="button" class="btn btn-danger text-center" value="Delete" 
+                                    <td><input type="button" class="btn btn-info text-center" value="Delete" 
                                                onclick="location.href = 'authorController?action=delete&id=${a.authorId}'"</td>
                                 </tr>                
                             </c:forEach>
@@ -45,7 +45,7 @@
                     </div>
 
                     <br>
-                    <input type="button" class="btn btn-primary btn-lg active" value="Add" onclick="location.href = 'authorController?action=add'">
+                    <input type="button" class="btn active" value="Add" onclick="location.href = 'authorController?action=add'">
 
 
                     <!-- jQuery  -->
