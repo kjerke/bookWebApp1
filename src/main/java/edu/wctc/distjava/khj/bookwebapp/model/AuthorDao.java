@@ -117,6 +117,42 @@ public class AuthorDao implements IAuthorDao {
 
         return list;
     }
+    
+    public final Author findAuthorById(Object authorId) 
+            throws SQLException, ClassNotFoundException{
+        //validation
+        if(authorId == null){
+            throw new IllegalArgumentException("You must provide a valid author Id");
+        }
+        
+        //logic
+        db.openConnection(driverClass, url, userName, password);
+        
+        List<Map<String, Object>> rawData = db.findRecordById(AUTHOR_TBL, AUTHOR_PK, authorId);
+
+        Author author = null;
+        for (Map<String, Object> rec : rawData) {
+            author = new Author();
+
+            //data validation
+            Object objRecId = rec.get("author_id");
+            Integer recId = objRecId == null
+                    ? 0 : Integer.parseInt(objRecId.toString());
+
+            //set "into" the Author obj
+            author.setAuthorId(recId);
+
+            Object objName = rec.get("author_name");
+            String authorName = objName == null ? "" : objName.toString();
+            author.setAuthorName(authorName);
+
+            Object objRecAdded = rec.get("date_added");
+            Date recAdded = objRecAdded == null ? null : (Date) objRecAdded;
+            author.setDateAdded(recAdded);
+        }
+        db.closeConnection();
+        return author;
+    }
 
     public String getDriverClass() {
         return driverClass;
@@ -180,9 +216,15 @@ public class AuthorDao implements IAuthorDao {
 
     }
 
+ 
+
     @Override
-    public int updateAuthor(List<Object> colValue, Object pkValue) throws SQLException, ClassNotFoundException {
+    public int addAuthor(List<String> colNames, List<Object> colValues) throws ClassNotFoundException, SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+  
+
+
 
 }

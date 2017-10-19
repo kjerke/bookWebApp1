@@ -26,10 +26,14 @@
                 <div class="col-sm-8">
                     <h1>Add New Author</h1>
 
-                   <form id=”addAuthorForm” name=”addAuthorForm” method="POST" action=authorController?action=add >
-                        <p>Name: &nbsp;<input class="form-control" type="text" name="name" id="authorName" value="" placeholder="Enter Author "></p>
-                        <input type="submit" class="btn btn-primary" id="submit" name="submit" value="Add Author">
+                   <form method ="POST" 
+                          action = "${pageContext.request.contextPath}/authorController?action=submitauthor">
+                        Author name:<br>
+                        <input type="text" name="author_name">
+                        <br>
+                        <input type="submit" name="submit" value="Submit">
                     </form>
+
 
                     <!-- jQuery -->
                     <script

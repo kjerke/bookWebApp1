@@ -17,44 +17,79 @@ import java.util.List;
  */
 public class AuthorService {
 
-    private IAuthorDao authorDao;
+     private IAuthorDao authorDao;
 
     public AuthorService(IAuthorDao authorDao) {
         setAuthorDao(authorDao);
     }
 
-    public final int removeAuthorById(String id)
-            throws ClassNotFoundException, SQLException,
-            NumberFormatException {
-
-        if (id == null) {
-            throw new IllegalArgumentException("id must be a Integer greater than 0");
-        }
-
-        Integer value = Integer.parseInt(id);
-
-        return authorDao.removeAuthorById(value);
-    }
-
-    public int addAuthor(List<Object> colValues) throws SQLException, ClassNotFoundException {
-
-        return authorDao.addAuthor(colValues);
-    }
-
-    public int updateAuthorById(List<Object> colValues, int id) throws SQLException, ClassNotFoundException {
-        return authorDao.updateAuthor(colValues, id);
-    }
-
-    public List<Author> getAuthorList()
+    public final List<Author> getAuthorList()
             throws SQLException, ClassNotFoundException {
 
         return authorDao.getListOfAuthors();
     }
+    
+    public final Author findAuthorById(Object authorId) 
+            throws SQLException, ClassNotFoundException{
+     
+        if (authorId == null){
+            throw new IllegalArgumentException("You must provide a valid author Id");
+        }
+        
+        
+        return authorDao.findAuthorById(authorId);
+        
+    }
+    
+   
+    public final int removeAuthorById(String id) //the value passed in will come from a web form, which always returns strings, so this should be your input 
+            throws SQLException, ClassNotFoundException, NumberFormatException{
+        
+        if(id == null || Integer.parseInt(id) <= 0){
+            throw new IllegalArgumentException("Id must be an integer greater than Zero.");
+        }
+        
+        Integer value = Integer.parseInt(id); 
+        
+        return authorDao.removeAuthorById(value);
+    }
+    
+    public final int addAuthor(List<String> colNames, List<Object>colValues)
+            throws ClassNotFoundException, SQLException{
+        
+       
+        if(colNames == null)
+            throw new IllegalArgumentException("You must provide valid column names to be updated.");
+        if(colValues == null)
+            throw new IllegalArgumentException("You must provide appropriate values for each colum to be updated.");
+        
+       
+        return authorDao.addAuthor(colNames, colValues);
+        
+    }
+    
+    public final int updateAuthor(List<String> colNames, List<Object> colValues, 
+            int pkValue) throws ClassNotFoundException, SQLException{
+        
+       
+        if (colNames == null) {
+            throw new IllegalArgumentException("You must provide valid column names to be updated.");
+        }
+        if (colValues == null) {
+            throw new IllegalArgumentException("You must provide appropriate values for each colum to be updated.");
+        }
+        if (pkValue <= 0 || pkValue > Integer.MAX_VALUE)
+            throw new IllegalArgumentException("You must provide a valid Author Id to update any records.");
+       
+        return authorDao.updateAuthorById(colNames, colValues, pkValue);
+    }
+    
 
     public IAuthorDao getAuthorDao() {
         return authorDao;
     }
 
+    //do validation /final
     public void setAuthorDao(IAuthorDao authorDao) {
         this.authorDao = authorDao;
     }

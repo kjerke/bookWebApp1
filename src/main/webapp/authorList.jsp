@@ -28,16 +28,7 @@
 
                     <div class="table-responsive">
                         <table class="table-striped table-hover" style="width:100%;">
-                            <thead class="thead-inverse">
-                        <tr>
-                            <th>Author Name</th>
-                            <th>Date</th>
-                            <th>ID</th>
-                            <th></th>
-                            
-                          
-                        </tr>
-                    </thead>
+                        
                   
                             <c:forEach var="a" items="${authorList}">
                                 <tr>                    

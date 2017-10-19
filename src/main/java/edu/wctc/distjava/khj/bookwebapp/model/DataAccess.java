@@ -46,6 +46,11 @@ public interface DataAccess {
   public abstract int updateRecordById(String tableName, List<String> colNames,
             List<Object> colValues, String pkColName, Object pkValue)
             throws SQLException;
+  
+  public abstract List<Map<String, Object>> findRecordById(String tableName, 
+            String pkColName, Object pkValue)
+            throws SQLException;
+
 
 
     
