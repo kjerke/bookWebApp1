@@ -9,6 +9,7 @@ import edu.wctc.distjava.khj.bookwebapp.model.Author;
 import edu.wctc.distjava.khj.bookwebapp.model.AuthorDao;
 import edu.wctc.distjava.khj.bookwebapp.model.AuthorService;
 import edu.wctc.distjava.khj.bookwebapp.model.MySqlDataAccess;
+import edu.wctc.distjava.khj.bookwebapp.model.IAuthorDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -19,6 +20,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import edu.wctc.distjava.khj.bookwebapp.model.IAuthorDao;
+import java.util.Arrays;
+import java.util.Date;
 
 /**
  *
@@ -29,8 +32,12 @@ public class AuthorController extends HttpServlet {
 
     public static final String ACTION = "action";
     public static final String LIST_ACTION = "list";
-    
-    
+    public static final String DELETE_ACTION = "delete";
+    public static final String ADD_ACTION = "add";
+    public static final String UPDATE_ACTION = "update";
+    public static final String AUTHOR_NAME = "name";
+    public static final String AUTHOR_ID = "id";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,33 +50,55 @@ public class AuthorController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         String destination = "/authorList.jsp";
-        try{
+        try {
             String action = request.getParameter(ACTION);
+            String id = request.getParameter(AUTHOR_ID);
+            String name = request.getParameter(AUTHOR_NAME);
+            String errorMsg = "";
+
+            Date date = new Date();
+
             IAuthorDao dao = new AuthorDao(
-            "com.mysql.jdbc.Driver",
-            "jdbc:mysql://localhost:3306/book",
-            "root", "admin",
-            new MySqlDataAccess()
-        );
-        
-        AuthorService authorService = 
-                new AuthorService(dao);
+                    "com.mysql.jdbc.Driver",
+                    "jdbc:mysql://localhost:3306/book",
+                    "root", "admin",
+                    new MySqlDataAccess()
+            );
+
+            AuthorService authorService
+                    = new AuthorService(dao);
             List<Author> authorList = null;
-            
-            if(action.equalsIgnoreCase(LIST_ACTION)) {
+
+            if (action.equalsIgnoreCase(LIST_ACTION)) {
                 authorList = authorService.getAuthorList();
                 request.setAttribute("authorList", authorList);
-            } 
-        } catch(Exception e) {
+                // Deletes author 
+            } else if (action.equalsIgnoreCase(DELETE_ACTION)) {
+                authorService.removeAuthorById(id);
+                authorList = authorService.getAuthorList();
+                request.setAttribute("authorList", authorList);
+                // Adds author
+            } else if (action.equalsIgnoreCase(ADD_ACTION)) {
+                authorService.addAuthor(Arrays.asList(name, date));
+                authorList = authorService.getAuthorList();
+                request.setAttribute("authorList", authorList);
+                // Updates author
+            } else if (action.equalsIgnoreCase(UPDATE_ACTION)) {
+                destination = "/editAuthor.jsp";
+                request.setAttribute("id", id);
+                request.setAttribute("authorName", name);
+                authorService.updateAuthorById(Arrays.asList(name, date), Integer.parseInt(id));
+            }
+        } catch (Exception e) {
             destination = "/authorList.jsp";
             request.setAttribute("errMessage", e.getMessage());
         }
-        
+
         RequestDispatcher view = request.getRequestDispatcher(destination);
         view.forward(request, response);
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

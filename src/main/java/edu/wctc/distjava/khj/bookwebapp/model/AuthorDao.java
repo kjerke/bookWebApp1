@@ -28,7 +28,6 @@ public class AuthorDao implements IAuthorDao {
     private final String AUTHOR_PK = "author_id";
     private final String AUTHOR_NAME = "author_name";
     private final String DATE_ADDED = "date_added";
-    
 
     public AuthorDao(String driverClass, String url, String userName,
             String password, DataAccess db) {
@@ -63,29 +62,29 @@ public class AuthorDao implements IAuthorDao {
         return authorsAdded;
     }
 
-   public final int updateAuthorById(List<String> colNames, List<Object> colValues, 
+    public final int updateAuthorById(List<String> colNames, List<Object> colValues,
             int pkValue) throws ClassNotFoundException, SQLException {
-        
-        //validate here:
+
         if (colNames == null) {
             throw new IllegalArgumentException("You must provide valid column names to be updated.");
         }
         if (colValues == null) {
             throw new IllegalArgumentException("You must provide appropriate values for each colum to be updated.");
         }
-        if (pkValue <= 0 || pkValue > Integer.MAX_VALUE)
+        if (pkValue <= 0 || pkValue > Integer.MAX_VALUE) {
             throw new IllegalArgumentException("You must provide a valid Author Id to update any records.");
-        
-        //logic
+        }
+
         String tableName = "author";
         String pkColName = "author_id";
-        
+
         db.openConnection(driverClass, url, userName, password);
         int recsUpdated = db.updateRecordById(tableName, colNames, colValues, pkColName, pkValue);
         db.closeConnection();
-        
+
         return recsUpdated;
-   }
+    }
+
     @Override
     public final List<Author> getListOfAuthors() throws SQLException, ClassNotFoundException {
 
@@ -167,8 +166,11 @@ public class AuthorDao implements IAuthorDao {
                 new MySqlDataAccess()
         );
 
-    //    int recsDeleted = dao.removeAuthorById(20);
-
+        //    int recsDeleted = dao.removeAuthorById(20);
+        
+        dao.addAuthor(Arrays.asList("Jon Smith", 2011-11-05));
+        
+        
         List<Author> list = dao.getListOfAuthors();
 
         for (Author a : list) {
