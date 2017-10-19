@@ -57,7 +57,7 @@
                     <input type="button" class="btn btn-primary btn-lg active" value="Add" onclick="location.href = 'authorController?action=add'">
 
 
-                    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+                    <!-- jQuery  -->
                     <script
                         src="https://code.jquery.com/jquery-3.2.1.min.js"
                         integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="

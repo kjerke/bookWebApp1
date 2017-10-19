@@ -15,10 +15,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-         <link rel="stylesheet" href="css/bootstrap.min.css" >
-        <link rel="stylesheet" href="css/custom.css" >
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous">
         <title>Edit Author</title>
     </head>
     <body>
@@ -44,6 +43,15 @@
                     <form name="home" method="POST" action="authorController?action=list" > 
                         <input class="btn btn-primary btn-lg active"   type="submit" value="Back to Authors List" />
                     </form>
+                         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+                    <script
+                        src="https://code.jquery.com/jquery-3.2.1.min.js"
+                        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+                        crossorigin="anonymous">
+                    </script>
+                    <!-- Bootstrap minified JavaScript -->
+                    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
                 </div>
             </div>
         </div>
