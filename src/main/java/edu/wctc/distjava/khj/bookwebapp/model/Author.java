@@ -1,17 +1,45 @@
 package edu.wctc.distjava.khj.bookwebapp.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import static javax.swing.text.StyleConstants.Size;
+import javax.validation.constraints.Size;
 
 /**
  *
  * @author jlombardo
  */
-public class Author {
+@Entity
+@Table(name = "author")
+public class Author implements Serializable{
+  private static final long serialVersionUID = 1L;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "author_id")
     private Integer authorId;
+    
+    @Size(max = 45)
+    @Column(name = "author_name")
     private String authorName;
+    
+    @Column(name = "date_added")
+    @Temporal(TemporalType.DATE)
     private Date dateAdded;
 
+    //validate all setters that have parameters
+    
     public Author() {
     }
 
@@ -49,6 +77,7 @@ public class Author {
         this.dateAdded = dateAdded;
     }
 
+    
     @Override
     public int hashCode() {
         int hash = 7;
@@ -75,6 +104,7 @@ public class Author {
     public String toString() {
         return "Author{" + "authorId=" + authorId + ", authorName=" + authorName + ", dateAdded=" + dateAdded + '}';
     }
+    
     
     
 }

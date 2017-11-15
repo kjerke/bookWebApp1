@@ -24,7 +24,8 @@
             <div class="row">
                 <div class="col-sm-10 col-sm-offset-1">
                     
-                    <h1>Author List</h1>       
+                    <h1>Author List</h1>  
+                    <form method="POST" action="">
 <input type="button" class="btn active" value="Add" onclick="location.href = 'authorController?action=add'">
                     <div class="table-responsive">
                         <table class="table" style="width:100%;">
@@ -46,7 +47,7 @@
 
                     <br>
                     <input type="button" class="btn active" value="Add" onclick="location.href = 'authorController?action=add'">
-
+</form>
 
                     <!-- jQuery  -->
                     <script
