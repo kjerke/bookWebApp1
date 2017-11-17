@@ -48,7 +48,7 @@ public class AuthorController extends HttpServlet {
     public static final String DESTINATION_EDIT_AUTHOR = "/editAuthor.jsp";
     public static final String DESTINATION_ERROR = "/error.jsp";
     public static final String DESTINATION_HOME = "/index.jsp";
-
+    
     @EJB
     private AuthorService authorService;
 
@@ -63,6 +63,7 @@ public class AuthorController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
 
         String destination = DESTINATION_AUTHORLIST; //default
 
@@ -109,11 +110,11 @@ public class AuthorController extends HttpServlet {
 
             } else if (action.equalsIgnoreCase(EDIT_ACTION)) {
 
-                String authorId = request.getParameter(AUTHOR_ID);
+                int authorId = Integer.parseInt(request.getParameter(AUTHOR_ID));
 
                 destination = DESTINATION_EDIT_AUTHOR;
 
-                Author eAuthor = authorService.findOneAuthorById(authorId);
+                Author eAuthor = authorService.findById(authorId);
                 request.setAttribute("eAuthor", eAuthor);
 
             } else if (action.equalsIgnoreCase(EDIT_AUTHOR_ACTION)) {
@@ -147,13 +148,18 @@ public class AuthorController extends HttpServlet {
         view.forward(request, response);
 
     }
-    
+
     private void getAuthorList(List<Author> authorList,
             AuthorService authorService, HttpServletRequest request)
-            throws SQLException, ClassNotFoundException, Exception{
-        
-        authorList = authorService.getAuthorList();
-        request.setAttribute("authorList", authorList);  
+            throws SQLException, ClassNotFoundException, Exception {
+
+        authorList = authorService.findAll();
+        request.setAttribute("authorList", authorList);
+    }
+
+    @Override
+    public void init() throws ServletException {
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

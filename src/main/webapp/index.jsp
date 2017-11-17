@@ -14,15 +14,19 @@
         
         <title>Book Web App</title>
     </head>
-    <body>
-             <div class="container">
+       <body>
+        
+        <jsp:include page="header.jsp" />
+        
+        <div class="conatiner-fluid">
             <div class="row">
                 <div class="col-sm-2"></div>
                 <div class="col-sm-8">
                     
-                    <h1>Welcome to the BookWebApp</h1>
+                    <h1>Select an Administrative Task</h1>
                     <ul>
-                        <li><a href="authorController?action=list">View all Authors</a></li>
+                        <li><a href="authorController?action=list">Manage Authors</a></li>
+                        <li><a href="BookController?action=list">Manage Books</a></li>
                         <li>... More to come</li>
                     </ul>
 
@@ -40,5 +44,6 @@
             </div> 
 
         </div>
+
     </body>
 </html>

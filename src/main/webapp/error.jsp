@@ -16,12 +16,12 @@
 
         <title>Error!</title>
     </head>
-    <body>
+     <body>
         <div class="conatiner-fluid">
             <div class="row">
                 <div class="col-sm-2"></div>
                 <div class="col-sm-8">
-                    <h1>Something Went Wrong!</h1>
+                    <h1>An Error Has Occurred</h1>
 
                     <p> Error: ${errorMessage}</p>
                     <p><c:out value="${errorMessage}" /></p>
@@ -40,6 +40,7 @@
             </div>
 
         </div>
-                    
+
+
     </body>
 </html>
