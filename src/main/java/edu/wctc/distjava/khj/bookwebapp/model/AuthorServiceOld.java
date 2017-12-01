@@ -63,7 +63,7 @@ public class AuthorServiceOld implements Serializable {
         
     }
     
-    
+    //could wrap all 3 exceptions into 1 custom exception as seen in adv. Java
     public int removeAuthorById(String id) //the value passed in will come from a web form, which always returns strings, so this should be your input 
             throws SQLException, ClassNotFoundException, NumberFormatException{
         
@@ -112,7 +112,7 @@ public class AuthorServiceOld implements Serializable {
         //logic
         //return authorDao.updateAuthorById(colNames, colValues, pkValue);
         
-        Date dateAdded = new Date();
+//        Date dateAdded = new Date();
 //        String jpql = "UPDATE Author a SET a.authorName = '" + authorName +
 //                "', a.dateAdded = '" + dateAdded + "'WHERE a.authorId = '" + id + "'";
 //        Query q = getEm().createQuery(jpql);
@@ -120,7 +120,7 @@ public class AuthorServiceOld implements Serializable {
         
         Author tempAuth = findOneAuthorById(pkValue);
         tempAuth.setAuthorName(authorName);
-        tempAuth.setDateAdded(dateAdded);
+//        tempAuth.setDateAdded(dateAdded);
         
         getEm().merge(tempAuth);
                  
@@ -144,7 +144,87 @@ public class AuthorServiceOld implements Serializable {
         //logic
         this.em = em;
     }
+    
 
+//    public iAuthorDAO getAuthorDao() {
+//        return authorDao;
+//    }
+//
+//    //do validation /final
+//    public void setAuthorDao(iAuthorDAO authorDao) {
+//        this.authorDao = authorDao;
+//    }
+    
+    
+    
+    
+    /*
+    Main method to test. Comment out before production
+    */
+       
+
+//    public static void main(String[] args)
+//            throws SQLException, ClassNotFoundException {
+//
+//        iAuthorDAO dao = new AuthorDAO("com.mysql.jdbc.Driver",
+//                "jdbc:mysql://localhost:3306/book",
+//                "root", "admin",
+//                new MySqlDataAccess()
+//        );
+//
+////        AuthorService_Old authorService = new AuthorService_Old(dao);
+//
+//        //test getAuthorList();
+//        System.out.println("Test getAuthorList:");
+//        List<Author> list = authorService.getAuthorList();
+//
+//        for (Author a : list) {
+//            System.out.println(a.getAuthorId() + ", " + a.getAuthorName()
+//                    + ", " + a.getDateAdded() + "\n");
+//        }
+//        
+//        //test findOneAuthorById()
+//        System.out.println("Test findOneAuthorById: ");
+//        Author author = authorService.findOneAuthorById(7);
+//        System.out.println(author.getAuthorId() + ", " + author.getAuthorName()
+//                + ", " + author.getDateAdded() + "\n");
+//
+//        
+        //test updateAuthorById
+//        System.out.println("Test updateAuthorById: ");
+//        int recsUpdated = authorService.updateAuthor(Arrays.asList("author_name", "date_added"), Arrays.asList("Gus Ramirez", "2017-10-07"), 10);
+//        System.out.println("Records Updated: " + recsUpdated);
+//        
+//        List<Author> updateAuthorTestList = authorService.getAuthorList();
+//
+//        for (Author a : updateAuthorTestList) {
+//            System.out.println(a.getAuthorId() + ", " + a.getAuthorName()
+//                    + ", " + a.getDateAdded() + "\n");
+//        }
+        
+        //test addAuthor
+//        System.out.println("Test addAuthor:");
+//        int recsAdded = authorService.addAuthor(Arrays.asList("author_name, date_added"), Arrays.asList("Agatha Christie", "2017-10-08"));
+//        System.out.println("Added Records: " + recsAdded);
+//        
+//        List<Author> addAuthorTestList = authorService.getAuthorList();
+//
+//        for (Author a : addAuthorTestList) {
+//            System.out.println(a.getAuthorId() + ", " + a.getAuthorName()
+//                    + ", " + a.getDateAdded() + "\n");
+//        }
+        
+        //test removeAuthorById();
+//        System.out.println("test removeAuthorById:");
+//        int recsDeleted = authorService.removeAuthorById("11");
+//        System.out.println(recsDeleted);
+//        List<Author> singleDelTestList = authorService.getAuthorList();        
+//        for (Author a : singleDelTestList) {
+//            System.out.println(a.getAuthorId() + ", " + a.getAuthorName()
+//                    + ", " + a.getDateAdded() + "\n");
+//        }
+        
+//    }
 
         
     }

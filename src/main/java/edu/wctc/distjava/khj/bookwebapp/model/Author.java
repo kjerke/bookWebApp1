@@ -27,9 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "author")
 public class Author implements Serializable{
 
-    @OneToMany(mappedBy = "authorId", cascade = CascadeType.ALL)
-    private Set<Book> bookSet;
-  private static final long serialVersionUID = 1L;
+     private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,6 +42,9 @@ public class Author implements Serializable{
     @Column(name = "date_added")
     @Temporal(TemporalType.DATE)
     private Date dateAdded;
+    
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL) //loaded lazily
+    private Set<Book> bookSet;
 
     //validate all setters that have parameters
     

@@ -33,6 +33,8 @@ public abstract class AbstractFacade<T> {
     public void remove(T entity) {
         getEm().remove(getEm().merge(entity));
     }
+    
+    //add a remove by Id method here
 
     public T findById(Object id) {
         return getEm().find(entityClass, id);

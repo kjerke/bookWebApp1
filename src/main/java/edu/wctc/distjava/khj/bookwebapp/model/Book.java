@@ -36,20 +36,24 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Book implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "book_id")
     private Integer bookId;
+    
     @Size(max = 255)
     @Column(name = "title")
     private String title;
+    
     @Size(max = 45)
     @Column(name = "isbn")
     private String isbn;
+    
     @JoinColumn(name = "author_id", referencedColumnName = "author_id")
     @ManyToOne(cascade = CascadeType.MERGE)
-    private Author authorId;
+    private Author author;
 
     public Book() {
     }
@@ -82,12 +86,12 @@ public class Book implements Serializable {
         this.isbn = isbn;
     }
 
-    public Author getAuthorId() {
-        return authorId;
+    public Author getAuthor() {
+        return author;
     }
 
-    public void setAuthorId(Author authorId) {
-        this.authorId = authorId;
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
     @Override

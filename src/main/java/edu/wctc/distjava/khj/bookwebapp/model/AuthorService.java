@@ -19,7 +19,7 @@ import javax.persistence.Query;
 @Stateless
 public class AuthorService extends AbstractFacade<Author> {
 
-   @PersistenceContext(unitName = "book_PU")
+  @PersistenceContext(unitName = "book_PU")
     private EntityManager em;
 
     @Override
@@ -53,7 +53,7 @@ public class AuthorService extends AbstractFacade<Author> {
         
         //validation
         
-       
+        //Add for authorName and dateAdded
 
         if (Integer.parseInt(pkValue) <= 0 || Integer.parseInt(pkValue) > Integer.MAX_VALUE)
             throw new IllegalArgumentException("You must provide a valid Author Id to update any records.");
@@ -90,6 +90,6 @@ public class AuthorService extends AbstractFacade<Author> {
         
         getEm().merge(author);
         
-    }   
+    }
     
 }
