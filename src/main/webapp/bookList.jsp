@@ -39,7 +39,7 @@
                                     <td>${b.title}</td>
                                     <td>${b.isbn}</td>
                                     <td><input type="button" class="btn btn-info text-center" value="Edit" 
-                                               onclick="location.href = 'bookController?action=edit&bookId=${b.bookId}'"</td>
+                                               onclick="location.href = 'BookController?action=edit&bookId=${b.bookId}'"</td>
                                     <td><input type="button" class="btn btn-danger text-center" value="Delete" 
                                                onclick="location.href = 'authorController?action=delete&bookId=${b.bookId}'"</td>
                                 </tr>                
@@ -48,7 +48,7 @@
                     </div>
 
                     <br>
-                    <input type="button" class="btn btn-primary" value="Add" onclick="location.href = 'bookController?action=add'">
+                    <input type="button" class="btn btn-primary" value="Add" onclick="location.href = 'BookController?action=add'">
 
 
                     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
